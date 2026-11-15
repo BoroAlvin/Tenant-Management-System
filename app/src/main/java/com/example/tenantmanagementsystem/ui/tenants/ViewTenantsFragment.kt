@@ -1,3 +1,4 @@
+
 package com.example.tenantmanagementsystem.ui.tenants
 
 import android.content.Intent
@@ -23,7 +24,11 @@ class ViewTenantsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentViewTenantsBinding.inflate(inflater, container, false)
+        _binding = FragmentViewTenantsBinding.inflate(
+            inflater,
+            container,
+            false
+        )
         return binding.root
     }
 
@@ -31,9 +36,9 @@ class ViewTenantsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val newTenant = args.newTenant
+
         binding.tenant = newTenant
 
-        // This is the fix: explicitly show or hide the group based on the tenant
         if (newTenant == null) {
             binding.newTenantGroup.visibility = View.GONE
         } else {
@@ -43,14 +48,19 @@ class ViewTenantsFragment : Fragment() {
         val tenants = TenantRepository.tenants
 
         if (tenants.isEmpty()) {
-            binding.allTenantsTextView.text = "No tenants yet. Add one from the Dashboard."
+            binding.allTenantsTextView.text =
+                "No tenants yet. Add one from the Dashboard."
         } else {
-            binding.allTenantsTextView.text = tenants.joinToString("\n\n") { it.summary() }
+            binding.allTenantsTextView.text =
+                tenants.joinToString("\n\n") { it.summary() }
         }
 
         binding.callButton.setOnClickListener {
             if (newTenant != null) {
-                val intent = Intent(Intent.ACTION_DIAL, Uri.parse("tel:${newTenant.phone}"))
+                val intent = Intent(
+                    Intent.ACTION_DIAL,
+                    Uri.parse("tel:${newTenant.phone}")
+                )
                 startActivity(intent)
             }
         }
