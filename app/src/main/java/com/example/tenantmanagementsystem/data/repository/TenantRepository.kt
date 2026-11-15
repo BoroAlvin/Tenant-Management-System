@@ -3,7 +3,6 @@ package com.example.tenantmanagementsystem.data.repository
 import com.example.tenantmanagementsystem.data.model.Tenant
 
 object TenantRepository {
-
     val tenants = mutableListOf<Tenant>()
 
     fun addTenant(tenant: Tenant) {
